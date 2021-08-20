@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    protected $guarded = [];  // This define all in [] as non fillable
+//    protected $fillable = ['title', 'excerpt', 'body'];
+
+    public function category(){
+         return $this->belongsTo(Category::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -17,35 +18,22 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 Route::get('/', function () {
 
-    $posts = Post::all();
+    $posts = Post::with('category')->get();
 
     return view('posts', [
         'posts' => $posts
     ]);
 
-
 });
 
-Route::get('/posts/{post}', function ($id) {
-    // Find a post by its slug and pass it to a view called "post
-
+Route::get('/posts/{post:slug}', function (Post $post) {
     return view('post',[
-        'post' => Post::findOrFail($id)
-    ]);
-
-   /* $path = __DIR__ . "/../resources/posts/{$slug}.html";
-
-    if(!file_exists($path)){
-        abort(404);
-    }
-
-    $post = cache()->remember("post.{$slug}" , 5 , function() use ($path){
-        return file_get_contents($path);
-    });
-
-    $post = file_get_contents($path);
-
-    return view('post', [
         'post' => $post
-    ]);*/
+    ]);
+});
+
+Route::get('categories/{category:slug}', function (Category $category){
+    return view('posts',[
+        'posts' => $category->posts
+    ]);
 });
