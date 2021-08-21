@@ -1,20 +1,14 @@
-<x-layoutWay1 >
-    @foreach($posts as &$post)
-        <article>
-            <h1>
-                <a href="/posts/{{$post->slug}}">
-                    {!! $post->title !!}
-                </a>
-            </h1>
+<x-layout >
 
-            <p>
-                <a href="/categories/{{ $post->category->slug }}"> {{ $post->category->name }} </a>
-            </p>
+    @include("_posts-header")
 
-            <div>
-                {!! $post->excerpt !!}
-            </div>
-        </article>
-    @endforeach
-</x-layoutWay1>
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+
+       <x-post-grid :posts="$posts"/>
+
+        <x-post-grid :posts="$posts"/>
+
+
+    </main>
+</x-layout>
 
