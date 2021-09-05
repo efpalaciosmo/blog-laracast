@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'name'=>'Efrain'
         ]);
 
-        Post::factory(5)->create([
+        Post::factory(10)->create([
             'user_id' => $user->id
         ]);
 //        User::truncate();

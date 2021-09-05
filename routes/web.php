@@ -22,7 +22,8 @@ Route::get('/', function () {
     $posts = Post::latest()->get();
 
     return view('posts', [
-        'posts' => $posts
+        'posts' => $posts,
+        'categories' => Category::all()
     ]);
 
 });
